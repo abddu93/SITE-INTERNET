@@ -1,0 +1,36 @@
+# Après chaque mise en ligne, prévient Bing (et les autres moteurs IndexNow)
+# que les pages du site ont changé, pour qu'ils viennent les relire plus vite.
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+    paths: [site/**, .github/workflows/indexnow.yml]
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Attendre la mise en ligne puis envoyer les adresses
+        run: |
+          site_url=$(jq -r '.site_url' config.json)
+          key=$(jq -r '.indexnow_key' config.json)
+          # Cloudflare publie en une à deux minutes : on attend que la nouvelle version soit en ligne.
+          for i in $(seq 1 20); do
+            if curl -fsS "$site_url/sitemap.xml" | cmp -s - site/sitemap.xml \
+               && [ "$(curl -fsS "$site_url/$key.txt")" = "$key" ]; then
+              break
+            fi
+            sleep 30
+          done
+          host=$(echo "$site_url" | sed -E 's#https?://([^/]+).*#\1#')
+          urls=$(grep -o '<loc>[^<]*' site/sitemap.xml | sed 's/<loc>//' | jq -R . | jq -s .)
+          jq -n --arg host "$host" --arg key "$key" --arg loc "$site_url/$key.txt" --argjson urls "$urls" \
+            '{host: $host, key: $key, keyLocation: $loc, urlList: $urls}' > body.json
+          cat body.json
+          code=$(curl -sS -o resp.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' --data @body.json)
+          echo "Réponse IndexNow : $code"; cat resp.txt
+          case "$code" in 200|202) ;; *) exit 1 ;; esac
