@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<link rel="canonical" href="{{canonical}}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="{{site_name}}">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{canonical}}">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+{{head_extra}}
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 17h14M16 10v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>{{site_name}}</span>
+    </a>
+    <nav aria-label="Navigation principale">
+      <a href="/calculateur/">Calculateur</a>
+      <a href="/kit/">Le kit</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+<main id="contenu">
+{{body}}
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p><strong>{{site_name}}</strong>, un service d'{{nom_commercial}}. Aidez vos clients à commander chez vous, sans commission.</p>
+    <nav aria-label="Pages légales">
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/cgv/">Conditions de vente</a>
+      <a href="/confidentialite/">Confidentialité</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

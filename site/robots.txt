@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kit-resto-direct.pages.dev/sitemap.xml

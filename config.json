@@ -1,0 +1,15 @@
+{
+  "site_name": "Kit Resto Direct",
+  "site_url": "https://kit-resto-direct.pages.dev",
+  "checkout_url": "",
+  "contact_email": "",
+  "kit_price_eur": 29,
+  "legal": {
+    "nom": "",
+    "adresse": "",
+    "telephone": "",
+    "siret": "",
+    "nom_commercial": "ABD Web Studio"
+  },
+  "updated": "2026-10-28"
+}

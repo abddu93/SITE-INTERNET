@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur gratuit — combien Uber Eats et Deliveroo coûtent à votre restaurant</title>
+<meta name="description" content="Entrez vos ventes et votre taux de commission pour voir ce que vous payez aux plateformes par mois et par an, et ce que vous garderiez en faisant commander vos clients en direct.">
+<link rel="canonical" href="https://kit-resto-direct.pages.dev/calculateur/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Kit Resto Direct">
+<meta property="og:title" content="Calculateur gratuit — combien Uber Eats et Deliveroo coûtent à votre restaurant">
+<meta property="og:description" content="Entrez vos ventes et votre taux de commission pour voir ce que vous payez aux plateformes par mois et par an, et ce que vous garderiez en faisant commander vos clients en direct.">
+<meta property="og:url" content="https://kit-resto-direct.pages.dev/calculateur/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script src="/assets/calc.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 17h14M16 10v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Kit Resto Direct</span>
+    </a>
+    <nav aria-label="Navigation principale">
+      <a href="/calculateur/">Calculateur</a>
+      <a href="/kit/">Le kit</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+<main id="contenu">
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Calculateur gratuit, sans inscription</p>
+    <h1>Combien Uber Eats et Deliveroo vous coûtent vraiment</h1>
+    <p class="lead">Entrez vos chiffres : le résultat s'affiche tout de suite. Rien n'est enregistré.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="calc">
+      <form id="calc" class="card" novalidate>
+        <div class="field">
+          <label for="ventes">Vos ventes sur les plateformes, par mois (en €)</label>
+          <input id="ventes" name="ventes" type="number" inputmode="decimal" min="0" step="100" value="4000">
+          <span class="hint">Le total de vos ventes Uber Eats et Deliveroo sur un mois.</span>
+        </div>
+        <div class="field">
+          <label for="taux">Votre taux de commission (en %, hors TVA)</label>
+          <input id="taux" name="taux" type="number" inputmode="decimal" min="0" max="100" step="0.5" value="30">
+          <div class="chips" role="group" aria-label="Taux courants">
+            <button class="chip" type="button" data-taux="12" aria-pressed="false">12 % · à emporter</button>
+            <button class="chip" type="button" data-taux="15" aria-pressed="false">15 % · vous livrez</button>
+            <button class="chip" type="button" data-taux="22" aria-pressed="false">22 % · négocié</button>
+            <button class="chip" type="button" data-taux="30" aria-pressed="false">30 % · la plateforme livre</button>
+          </div>
+          <span class="hint">Taux indicatifs : le vôtre est dans votre contrat ou sur vos relevés.</span>
+        </div>
+        <div class="field check">
+          <input id="tva" name="tva" type="checkbox">
+          <label for="tva" style="font-weight:400">Mon restaurant ne récupère pas la TVA (franchise en base). La TVA sur la commission est alors un coût en plus.</label>
+        </div>
+        <div class="field">
+          <label for="part">Part de vos clients plateformes qui passeraient en direct : <span id="part-label">20 %</span></label>
+          <input id="part" name="part" type="range" min="0" max="50" step="5" value="20">
+          <span class="hint">Personne ne connaît ce chiffre à l'avance : essayez plusieurs valeurs.</span>
+        </div>
+      </form>
+
+      <div class="card results" aria-live="polite">
+        <p class="muted" style="margin-bottom:4px">Vous payez aux plateformes environ</p>
+        <p class="big"><span id="r-mois">–</span> <span class="muted" style="font-size:1rem;font-family:var(--sans);font-weight:400">par mois</span></p>
+        <div class="row"><span>Par an</span><strong id="r-an">–</strong></div>
+        <div class="row"><span>Commission réelle sur vos ventes</span><strong id="r-effectif">–</strong></div>
+        <h2 style="font-size:1.25rem">Si une partie de vos clients commande en direct</h2>
+        <div class="row"><span>Ventes passées en direct, par mois</span><strong id="r-bascule">–</strong></div>
+        <div class="row"><span>Vous gardez en plus, par mois</span><strong class="good" id="r-garde">–</strong></div>
+        <div class="row"><span>Vous gardez en plus, par an</span><strong class="good" id="r-garde-an">–</strong></div>
+        <p id="r-alerte" class="note" hidden>À ce taux, une commande directe ne coûte pas moins cher qu'une commande sur la plateforme : les frais de paiement et la remise de bienvenue mangent l'économie.</p>
+        <p class="note">Estimation. On retire environ 6 % sur les ventes passées en direct : 2 % de frais de paiement en ligne et 4 % pour une remise de bienvenue. Les clients en plus venus de Google ne sont pas comptés.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/kit/">Faire passer mes clients en direct</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2 style="margin-top:0">Comment le calcul est fait</h2>
+    <ul>
+      <li><strong>Ce que vous payez</strong> = vos ventes sur les plateformes × votre taux de commission, avec la TVA en plus si vous ne la récupérez pas.</li>
+      <li><strong>Ce que vous gardez</strong> = les ventes qui passent en direct × (votre taux − 6 %).</li>
+    </ul>
+    <p>Pour comprendre d'où viennent les taux et comment les faire baisser, lisez notre guide <a href="/guides/commission-uber-eats-deliveroo/">Commission Uber Eats et Deliveroo en 2026</a>.</p>
+    <p class="note">Mis à jour le 28 octobre 2026.</p>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p><strong>Kit Resto Direct</strong>, un service d'ABD Web Studio. Aidez vos clients à commander chez vous, sans commission.</p>
+    <nav aria-label="Pages légales">
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/cgv/">Conditions de vente</a>
+      <a href="/confidentialite/">Confidentialité</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
