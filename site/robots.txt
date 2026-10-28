@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kit-resto-direct.pages.dev/sitemap.xml
+Sitemap: https://kit-resto-direct.dehabdoulaye635.workers.dev/sitemap.xml
