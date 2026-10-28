@@ -93,26 +93,91 @@ def parse(page):
     return meta, body
 
 
+def plain(fragment):
+    """Texte brut d'un morceau de HTML, pour les données structurées."""
+    text = re.sub(r"<[^>]+>", "", fragment)
+    return html.unescape(re.sub(r"\s+", " ", text)).strip()
+
+
+def faq_entries(body):
+    pairs = re.findall(r"<details>\s*<summary>(.*?)</summary>\s*<p>(.*?)</p>\s*</details>", body, re.S)
+    return [
+        {"@type": "Question", "name": plain(q), "acceptedAnswer": {"@type": "Answer", "text": plain(fill(a))}}
+        for q, a in pairs
+    ]
+
+
+publisher = {
+    "@type": "Organization",
+    "name": legal["nom_commercial"],
+    "url": tokens["site_url"] + "/",
+}
+
+
+def structured_data(meta, body, canonical):
+    kind = meta.get("schema", "")
+    items = []
+    if kind == "website":
+        items.append({"@type": "WebSite", "name": config["site_name"], "url": tokens["site_url"] + "/",
+                      "inLanguage": "fr-FR", "publisher": publisher})
+    elif kind == "product":
+        offer = {"@type": "Offer", "price": str(price), "priceCurrency": "EUR", "url": canonical,
+                 "availability": "https://schema.org/InStock" if config["checkout_url"].strip()
+                 else "https://schema.org/PreOrder"}
+        items.append({"@type": "Product", "name": config["site_name"], "description": meta["description"],
+                      "brand": {"@type": "Brand", "name": config["site_name"]},
+                      "image": tokens["site_url"] + "/assets/og.png", "offers": offer})
+    elif kind == "tool":
+        items.append({"@type": "WebApplication", "name": plain(re.search(r"<h1>(.*?)</h1>", body, re.S).group(1)),
+                      "url": canonical, "applicationCategory": "BusinessApplication", "operatingSystem": "Web",
+                      "inLanguage": "fr-FR", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"},
+                      "publisher": publisher})
+    elif kind == "article":
+        items.append({"@type": "Article", "headline": plain(re.search(r"<h1>(.*?)</h1>", body, re.S).group(1)),
+                      "description": meta["description"], "inLanguage": "fr-FR", "mainEntityOfPage": canonical,
+                      "datePublished": meta.get("published", config["updated"]),
+                      "dateModified": config["updated"], "author": publisher, "publisher": publisher,
+                      "image": tokens["site_url"] + "/assets/og.png"})
+    faq = faq_entries(body)
+    if faq:
+        items.append({"@type": "FAQPage", "mainEntity": faq})
+    if not items:
+        return ""
+    data = {"@context": "https://schema.org", "@graph": items}
+    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    return f'<script type="application/ld+json">{payload}</script>'
+
+
 if OUT.exists():
     shutil.rmtree(OUT)
 shutil.copytree(SRC / "assets", OUT / "assets")
 shutil.copy(SRC / "_headers", OUT / "_headers")
+if config.get("indexnow_key"):
+    (OUT / f"{config['indexnow_key']}.txt").write_text(config["indexnow_key"], encoding="utf-8")
+
+verification = ""
+if config.get("google_site_verification", "").strip():
+    verification += f'<meta name="google-site-verification" content="{html.escape(config["google_site_verification"].strip())}">\n'
+if config.get("bing_site_verification", "").strip():
+    verification += f'<meta name="msvalidate.01" content="{html.escape(config["bing_site_verification"].strip())}">\n'
 
 sitemap = []
 for page in sorted((SRC / "pages").glob("*.html")):
     meta, body = parse(page)
     path = meta["path"]
-    head_extra = ""
-    if meta.get("script"):
-        head_extra = f'<script src="{meta["script"]}" defer></script>'
+    head_extra = verification if path == "/" else ""
+    for script in filter(None, (s.strip() for s in meta.get("script", "").split(","))):
+        head_extra += f'<script src="{script}" defer></script>'
     if meta.get("noindex") == "yes":
         head_extra += '\n<meta name="robots" content="noindex">'
     canonical = tokens["site_url"] + path
+    head_extra += "\n" + structured_data(meta, body, canonical)
     page_html = layout
     for key, value in {
         "title": html.escape(meta["title"]),
         "description": html.escape(meta["description"]),
         "canonical": canonical,
+        "og_image": tokens["site_url"] + "/assets/og.png",
         "head_extra": head_extra,
         "body": fill(body),
     }.items():

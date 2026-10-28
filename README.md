@@ -7,7 +7,7 @@ Site de Kit Resto Direct, un service d'ABD Web Studio : un calculateur gratuit, 
 - `src/pages/` : le contenu des pages (en-tête entre `---`, puis le HTML).
 - `src/layout.html` : la mise en page commune.
 - `src/assets/` : styles, calculateur, icône.
-- `config.json` : les réglages (adresse du site, lien de paiement, e-mail, informations légales).
+- `config.json` : les réglages (adresse du site, lien de paiement, e-mail, informations légales, codes de vérification Google Search Console et Bing, clé IndexNow).
 - `build.py` : génère le site dans `site/`.
 - `site/` : le site généré, publié tel quel par Cloudflare Pages.
 

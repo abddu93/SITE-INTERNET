@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Générateur de QR code gratuit pour restaurant — menu, commande en ligne, avis</title>
+<meta name="description" content="Créez gratuitement le QR code de votre menu, de votre page de commande ou de vos avis Google. Sans inscription, téléchargement en PNG ou SVG, prêt à imprimer.">
+<link rel="canonical" href="https://kit-resto-direct.dehabdoulaye635.workers.dev/outils/qr-code-restaurant/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Kit Resto Direct">
+<meta property="og:title" content="Générateur de QR code gratuit pour restaurant — menu, commande en ligne, avis">
+<meta property="og:description" content="Créez gratuitement le QR code de votre menu, de votre page de commande ou de vos avis Google. Sans inscription, téléchargement en PNG ou SVG, prêt à imprimer.">
+<meta property="og:url" content="https://kit-resto-direct.dehabdoulaye635.workers.dev/outils/qr-code-restaurant/">
+<meta property="og:image" content="https://kit-resto-direct.dehabdoulaye635.workers.dev/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/style.css">
+<script src="/assets/qrcode.js" defer></script><script src="/assets/qr-tool.js" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "name": "Générateur de QR code pour restaurant", "url": "https://kit-resto-direct.dehabdoulaye635.workers.dev/outils/qr-code-restaurant/", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "inLanguage": "fr-FR", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "publisher": {"@type": "Organization", "name": "ABD Web Studio", "url": "https://kit-resto-direct.dehabdoulaye635.workers.dev/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Ce générateur de QR code est-il vraiment gratuit ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui, sans inscription et sans limite. Le QR code ne contient que l'adresse que vous avez saisie : il ne passe par aucun service intermédiaire et ne s'arrêtera jamais de fonctionner."}}, {"@type": "Question", "name": "Mon QR code va-t-il expirer ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Il mène directement à l'adresse saisie. Il fonctionnera tant que cette adresse existe."}}, {"@type": "Question", "name": "PNG ou SVG, lequel choisir ?", "acceptedAnswer": {"@type": "Answer", "text": "Le PNG convient à la plupart des usages : Word, Canva, impression maison. Le SVG reste net à toutes les tailles : c'est le format à donner à un imprimeur pour une grande affiche."}}, {"@type": "Question", "name": "Puis-je mettre le QR code de mes avis Google ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Copiez le lien « Recevoir plus d'avis » de votre fiche d'établissement Google et collez-le ici. Demandez un avis à tous vos clients, sans cadeau en échange : Google interdit les avis obtenus contre un avantage. Voir notre guide des avis Google."}}]}]}</script>
+</head>
+<body>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">
+      <svg aria-hidden="true" width="28" height="28" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 17h14M16 10v14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>Kit Resto Direct</span>
+    </a>
+    <nav aria-label="Navigation principale">
+      <a href="/calculateur/">Calculateur</a>
+      <a href="/outils/qr-code-restaurant/">QR code</a>
+      <a href="/kit/">Le kit</a>
+      <a href="/guides/">Guides</a>
+    </nav>
+  </div>
+</header>
+<main id="contenu">
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Outil gratuit, sans inscription</p>
+    <h1>Générateur de QR code pour restaurant</h1>
+    <p class="lead">Collez l'adresse de votre menu, de votre page de commande ou de vos avis Google : votre QR code s'affiche tout de suite, prêt à télécharger et à imprimer.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap">
+    <div class="calc">
+      <form id="qr-form" class="card" novalidate>
+        <div class="field">
+          <label for="qr-url">Adresse vers laquelle le QR code mène</label>
+          <input id="qr-url" name="qr-url" type="url" inputmode="url" placeholder="https://votre-restaurant.fr/commander">
+          <span class="hint">Commencez par https://. Testez toujours le QR code avec votre téléphone avant d'imprimer.</span>
+          <p id="qr-error" class="note" hidden>Cette adresse ne semble pas complète. Elle doit commencer par https:// et contenir un point.</p>
+        </div>
+        <div class="field">
+          <label for="qr-label">Texte sous le QR code (facultatif)</label>
+          <input id="qr-label" name="qr-label" type="text" placeholder="Commandez en direct : -10 % la 1re fois">
+          <span class="hint">Le texte s'affiche ici pour vous aider à préparer votre support ; il n'est pas inclus dans le fichier.</span>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" id="qr-png" href="#" aria-disabled="true">Télécharger en PNG</a>
+          <a class="btn btn-ghost" id="qr-svg" href="#" aria-disabled="true">Télécharger en SVG</a>
+        </div>
+        <p class="note" style="margin-top:14px">Le QR code est créé dans votre navigateur : l'adresse saisie n'est envoyée nulle part.</p>
+      </form>
+
+      <div class="card" style="text-align:center">
+        <div id="qr-out" style="max-width:320px;margin:0 auto" aria-live="polite"></div>
+        <p id="qr-caption" style="font-weight:700;margin-top:12px"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap narrow">
+    <h2 style="margin-top:0">Où placer vos QR codes</h2>
+    <ul>
+      <li><strong>Sur chaque table</strong>, pour le menu et les avis Google.</li>
+      <li><strong>En vitrine</strong>, pour commander à emporter sans faire la queue.</li>
+      <li><strong>Dans les sacs à emporter</strong>, avec une offre pour la prochaine commande en direct.</li>
+      <li><strong>Au comptoir</strong>, à côté du terminal de paiement.</li>
+    </ul>
+
+    <h2>Les bonnes pratiques</h2>
+    <ul>
+      <li><strong>Assez grand :</strong> au moins 2 à 3 cm de côté sur une carte, plus grand sur une affiche lue de loin.</li>
+      <li><strong>Une marge blanche</strong> tout autour, et un QR code noir sur fond clair.</li>
+      <li><strong>Une phrase qui dit pourquoi scanner :</strong> « Commandez en direct », « Voir le menu », « Laissez-nous un avis ».</li>
+      <li><strong>Une adresse qui ne changera pas.</strong> Si elle change, il faudra réimprimer tous vos supports.</li>
+      <li><strong>Un test avant d'imprimer</strong>, avec deux téléphones différents.</li>
+    </ul>
+
+    <div class="callout">
+      <h3>Des cartes et une affiche prêtes à imprimer</h3>
+      <p>Le <a href="/kit/">Kit Resto Direct</a> contient un générateur de cartes « -10 % en direct » (10 par feuille A4) et d'affiche de vitrine, avec votre QR code, et le plan sur 30 jours pour faire commander vos clients chez vous.</p>
+    </div>
+
+    <h2>Questions fréquentes</h2>
+    <details>
+      <summary>Ce générateur de QR code est-il vraiment gratuit ?</summary>
+      <p>Oui, sans inscription et sans limite. Le QR code ne contient que l'adresse que vous avez saisie : il ne passe par aucun service intermédiaire et ne s'arrêtera jamais de fonctionner.</p>
+    </details>
+    <details>
+      <summary>Mon QR code va-t-il expirer ?</summary>
+      <p>Non. Il mène directement à l'adresse saisie. Il fonctionnera tant que cette adresse existe.</p>
+    </details>
+    <details>
+      <summary>PNG ou SVG, lequel choisir ?</summary>
+      <p>Le PNG convient à la plupart des usages : Word, Canva, impression maison. Le SVG reste net à toutes les tailles : c'est le format à donner à un imprimeur pour une grande affiche.</p>
+    </details>
+    <details>
+      <summary>Puis-je mettre le QR code de mes avis Google ?</summary>
+      <p>Oui. Copiez le lien « Recevoir plus d'avis » de votre fiche d'établissement Google et collez-le ici. Demandez un avis à tous vos clients, sans cadeau en échange : Google interdit les avis obtenus contre un avantage. Voir notre <a href="/guides/avis-google-restaurant/">guide des avis Google</a>.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p><strong>Kit Resto Direct</strong>, un service d'ABD Web Studio. Aidez vos clients à commander chez vous, sans commission.</p>
+    <nav aria-label="Outils gratuits">
+      <a href="/calculateur/">Calculateur de commissions</a>
+      <a href="/outils/qr-code-restaurant/">Générateur de QR code</a>
+      <a href="/guides/">Tous les guides</a>
+    </nav>
+    <nav aria-label="Pages légales">
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="/cgv/">Conditions de vente</a>
+      <a href="/confidentialite/">Confidentialité</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

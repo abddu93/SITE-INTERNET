@@ -12,6 +12,10 @@
 <meta property="og:title" content="{{title}}">
 <meta property="og:description" content="{{description}}">
 <meta property="og:url" content="{{canonical}}">
+<meta property="og:image" content="{{og_image}}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/style.css">
 {{head_extra}}
@@ -26,6 +30,7 @@
     </a>
     <nav aria-label="Navigation principale">
       <a href="/calculateur/">Calculateur</a>
+      <a href="/outils/qr-code-restaurant/">QR code</a>
       <a href="/kit/">Le kit</a>
       <a href="/guides/">Guides</a>
     </nav>
@@ -37,6 +42,11 @@
 <footer class="site-footer">
   <div class="wrap footer-inner">
     <p><strong>{{site_name}}</strong>, un service d'{{nom_commercial}}. Aidez vos clients à commander chez vous, sans commission.</p>
+    <nav aria-label="Outils gratuits">
+      <a href="/calculateur/">Calculateur de commissions</a>
+      <a href="/outils/qr-code-restaurant/">Générateur de QR code</a>
+      <a href="/guides/">Tous les guides</a>
+    </nav>
     <nav aria-label="Pages légales">
       <a href="/mentions-legales/">Mentions légales</a>
       <a href="/cgv/">Conditions de vente</a>

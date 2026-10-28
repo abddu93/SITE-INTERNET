@@ -91,7 +91,7 @@ summary { cursor: pointer; font-weight: 700; }
 .field { margin-bottom: 18px; }
 .field label { display: block; font-weight: 700; margin-bottom: 6px; }
 .field .hint { display: block; font-size: .88rem; color: var(--muted); margin-top: 4px; }
-.field input[type="number"] { width: 100%; font: inherit; padding: 12px 14px; border: 1px solid #b9b0a3; border-radius: 10px; background: var(--surface); min-height: 48px; }
+.field input[type="number"], .field input[type="url"], .field input[type="text"] { width: 100%; font: inherit; padding: 12px 14px; border: 1px solid #b9b0a3; border-radius: 10px; background: var(--surface); min-height: 48px; }
 .field input[type="range"] { width: 100%; min-height: 32px; accent-color: var(--accent); }
 .field input:focus-visible, .btn:focus-visible, a:focus-visible, .chip:focus-visible { outline: 3px solid #1b5fa8; outline-offset: 2px; }
 .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
