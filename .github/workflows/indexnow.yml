@@ -19,8 +19,8 @@ jobs:
           key=$(jq -r '.indexnow_key' config.json)
           # Cloudflare publie en une à deux minutes : on attend que la nouvelle version soit en ligne.
           for i in $(seq 1 20); do
-            if curl -fsS "$site_url/sitemap.xml" | cmp -s - site/sitemap.xml \
-               && [ "$(curl -fsS "$site_url/$key.txt")" = "$key" ]; then
+            if curl -fsS "$site_url/build-id.txt" | cmp -s - site/build-id.txt; then
+              echo "Nouvelle version en ligne."
               break
             fi
             sleep 30

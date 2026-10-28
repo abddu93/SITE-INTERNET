@@ -7,6 +7,7 @@ Usage : python3 build.py            (avertit si des réglages manquent)
 Les réglages (lien de paiement, e-mail, informations légales) sont dans
 config.json. Le contenu des pages est dans src/pages/.
 """
+import hashlib
 import html
 import json
 import re
@@ -199,6 +200,13 @@ for page in sorted((SRC / "pages").glob("*.html")):
 (OUT / "robots.txt").write_text(
     f"User-agent: *\nAllow: /\n\nSitemap: {tokens['site_url']}/sitemap.xml\n", encoding="utf-8"
 )
+
+# Empreinte du contenu publié : permet de vérifier qu'une mise en ligne est bien arrivée.
+digest = hashlib.sha256()
+for f in sorted(OUT.rglob("*")):
+    if f.is_file():
+        digest.update(str(f.relative_to(OUT)).encode() + b"\0" + f.read_bytes())
+(OUT / "build-id.txt").write_text(digest.hexdigest() + "\n", encoding="utf-8")
 
 print(f"{len(sitemap)} pages dans le plan du site, sortie : {OUT}")
 if missing:
