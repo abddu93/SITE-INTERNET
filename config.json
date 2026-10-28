@@ -2,13 +2,13 @@
   "site_name": "Kit Resto Direct",
   "site_url": "https://kit-resto-direct.pages.dev",
   "checkout_url": "",
-  "contact_email": "",
+  "contact_email": "dehabdoulaye635@gmail.com",
   "kit_price_eur": 29,
   "legal": {
-    "nom": "",
-    "adresse": "",
-    "telephone": "",
-    "siret": "",
+    "nom": "Abdoulaye Deh",
+    "adresse": "10 rue Eugène Delacroix, 49000 Angers",
+    "telephone": "06 29 83 76 35",
+    "siret": "131 114 860 00011",
     "nom_commercial": "ABD Web Studio"
   },
   "updated": "2026-10-28"
