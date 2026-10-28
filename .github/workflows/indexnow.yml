@@ -12,7 +12,7 @@ jobs:
   ping:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Attendre la mise en ligne puis envoyer les adresses
         run: |
           site_url=$(jq -r '.site_url' config.json)
