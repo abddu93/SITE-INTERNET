@@ -1,0 +1,9 @@
+// Réglages Cloudflare pour publier le dossier site/ (site statique, pas de code serveur).
+{
+  "name": "kit-resto-direct",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "404-page"
+  }
+}
