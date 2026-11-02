@@ -69,9 +69,15 @@ tokens = {
 
 
 def nbsp(text):
-    """Espaces insécables dans les nombres (4 000 €, 30 %) pour éviter les coupures."""
-    text = re.sub(r"(\d) (?=\d{3}\b)", "\\1\u00a0", text)
-    return re.sub(r"(\d) (?=[€%])", "\\1\u00a0", text)
+    """Espaces insécables dans les nombres (4 000 €, 30 %) pour éviter les coupures.
+
+    Seul le texte entre les balises est touché : les attributs (viewBox="0 0 100 100") restent intacts.
+    """
+    def fix(segment):
+        segment = re.sub(r"(\d) (?=\d{3}\b)", "\\1\u00a0", segment)
+        return re.sub(r"(\d) (?=[€%])", "\\1\u00a0", segment)
+
+    return re.sub(r">([^<]+)<", lambda m: ">" + fix(m.group(1)) + "<", text)
 
 
 def fill(text):
